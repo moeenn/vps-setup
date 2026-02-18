@@ -179,11 +179,17 @@ def set_timezone() -> None:
     exec(["sudo", "timedatectl", "set-timezone", "UTC"])
 
 
+# TODO: implement.
+def setup_systemd_service() -> None:
+    pass
+
+
 def main() -> None:
     steps = [
         ("Upgrade system", upgrade_system),
         ("Install base packages", install_base_packages),
         ("Set timezone (UTC)", set_timezone),
+        ("Setup Systemd Service", setup_systemd_service),
         ("Setup Nginx", setup_nginx),
         ("Setup firewall", setup_firewall),
     ]
