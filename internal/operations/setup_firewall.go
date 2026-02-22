@@ -50,8 +50,8 @@ func closeIncomingOutgoing() error {
 		return fmt.Errorf("failed to close incoming connections: %w", err)
 	}
 
-	fmt.Printf("%s[info] Closing outgoing connections.%s\n", colors.BLUE, colors.RESET)
-	cmd = exec.Command("sudo", "ufw", "default", "deny", "outgoing")
+	fmt.Printf("%s[info] Allowing outgoing connections.%s\n", colors.BLUE, colors.RESET)
+	cmd = exec.Command("sudo", "ufw", "default", "allow", "outgoing")
 	if err := shell.Execute(cmd); err != nil {
 		return fmt.Errorf("failed to close outgoing connections: %w", err)
 	}
