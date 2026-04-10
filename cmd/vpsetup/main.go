@@ -14,21 +14,7 @@ type MenuEntry struct {
 	Action func(config *config.Config) error
 }
 
-func main() {
-	// TODO: load actual config.
-	cfg := config.DefaultConfig()
-
-	menu := []MenuEntry{
-		{Title: "Disable root user", Action: nil},
-		{Title: "Update system", Action: operations.SystemUpdate},
-		{Title: "Install base packages", Action: operations.InstallBasePackages},
-		{Title: "Setup unattended upgrades", Action: nil},
-		{Title: "Set timezone (UTC)", Action: operations.SetUtcTimezone},
-		{Title: "Setup Nginx", Action: nil},
-		{Title: "Setup firewall (UFW)", Action: operations.SetupFirewall},
-		{Title: "Setup SystemD service", Action: nil},
-	}
-
+func printMenu(cfg *config.Config, menu []MenuEntry) {
 	for {
 		fmt.Printf("\n%sPlease select an option: %s\n", colors.YELLOW, colors.RESET)
 		for i, entry := range menu {
@@ -69,4 +55,22 @@ func main() {
 			fmt.Printf("%saction failed: %s.%s", colors.RED, err.Error(), colors.RESET)
 		}
 	}
+}
+
+func main() {
+	// TODO: load actual config.
+	cfg := config.DefaultConfig()
+
+	menu := []MenuEntry{
+		{Title: "Disable root user", Action: nil},
+		{Title: "Update system", Action: operations.SystemUpdate},
+		{Title: "Install base packages", Action: operations.InstallBasePackages},
+		{Title: "Setup unattended upgrades", Action: nil},
+		{Title: "Set timezone (UTC)", Action: operations.SetUtcTimezone},
+		{Title: "Setup Nginx", Action: nil},
+		{Title: "Setup firewall (UFW)", Action: operations.SetupFirewall},
+		{Title: "Setup SystemD service", Action: nil},
+	}
+
+	printMenu(cfg, menu)
 }
